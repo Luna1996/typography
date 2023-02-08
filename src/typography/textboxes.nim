@@ -198,11 +198,12 @@ proc adjustScroll*(textBox: TextBox) =
   if textBox.scrollable:
     let
       r = textBox.cursorRect
-    # is pos.y inside the window?
-    if r.y < textBox.scroll.y:
-      textBox.scroll.y = r.y
-    if r.y + r.h > textBox.scroll.y + float textBox.height:
-      textBox.scroll.y = r.y + r.h - float textBox.height
+    if textBox.multiline:
+      # is pos.y inside the window?
+      if r.y < textBox.scroll.y:
+        textBox.scroll.y = r.y
+      if r.y + r.h > textBox.scroll.y + float textBox.height:
+        textBox.scroll.y = r.y + r.h - float textBox.height
     # is pos.x inside the window?
     if r.x < textBox.scroll.x:
       textBox.scroll.x = r.x
